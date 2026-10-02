@@ -38,7 +38,7 @@ En la pantalla se percibe una peor calidad que las anteriores, con una resolucó
 más simple.
 
 En general, el teléfono moderno permite una mejor distribución de los iconos en pantalla, ajustándose
-al tamaño de la misma. Además, ofrece una apareción más actual y una experiencia más cómoda e intuitiva.
+al tamaño de la misma. Además, ofrece una apariencia más actual y una experiencia más cómoda e intuitiva.
 En el caso de la tablet, nos permite una mayor distribución de pantalla, aumentando así la visibilidad
 de textos pequeños e iconografía, aprovechando mejor el espacio disponible.
 Por su parte, el teléfono antiguo, muestra una pantalla más reducida, lo que limita la resolución de 
