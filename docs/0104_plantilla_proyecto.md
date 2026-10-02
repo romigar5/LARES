@@ -92,7 +92,7 @@ llamada a equipo sociosanitario, escuchar canciones, etc).
 > Dibuja las pantallas principales. A mano y fotografiado es válido.
 > Pega aquí las imágenes o indica el nombre de los archivos adjuntos.
 > 
-> Bocetos:
+> Bocetos: 
 > ![bocetos_lares.png](res/bocetos_lares.png)
 
 ---
