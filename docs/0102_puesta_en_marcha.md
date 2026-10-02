@@ -43,4 +43,4 @@ En el caso de la tablet, nos permite una mayor distribución de pantalla, aument
 de textos pequeños e iconografía, aprovechando mejor el espacio disponible.
 Por su parte, el teléfono antiguo, muestra una pantalla más reducida, lo que limita la resolución de 
 la misma y provoca que los elementos de la interfaz ocupen un espacio mayor. En comparación con los 
-dispotiviso analizados, este presenta una peor presentación de la información.
+dispotiviso analizados, este presenta una peor presentación de la información. 
