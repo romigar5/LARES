@@ -50,4 +50,4 @@ En base a lo observado en mi propio teléfono, de cara a crear una app, tendría
 
      En el dispositivo que el almacenamiento es muy limitado, entre otras cosas porque un 26% de el, 
      es consumido por las actualizaciones del sistema. A la hora de diseñar una app, intentaría incluir 
-     mecanismos de limpieza de caché para evitar saturar el almacenamiento.
+     mecanismos de limpieza de caché para evitar saturar el almacenamiento. 
