@@ -97,7 +97,7 @@ llamada a equipo sociosanitario, escuchar canciones, etc).
 
 ---
 
-## 7 · Qué datos guarda la app
+## 7 · Qué datos guarda la app 
 
 | Tipo de dato       | Campos                                 | Ejemplo                                       |
 |--------------------|----------------------------------------|-----------------------------------------------|
