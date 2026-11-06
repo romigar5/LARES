@@ -1,3 +1,6 @@
-Dentro de la aplicación, se realizaron los mockups de cinco pantallas. A continuación se presenta el análisis de la PáginaListado
-que pertenece al mockup de la pantalla_estado_enfermo:
-![mockup_pantalla2_estadoENFERMO.png](res/mockup_pantalla2_estadoENFERMO.png)
+**DISEÑO DE ALTA FIDELIDAD DE LA PÁGINA DE LISTADO**
+A continuación, se muestra la pantalla de listado en la que aparecen los familiares guardados en la 
+aplicación.
+![FAMILIARES](res/FAMILIARES.png)
+
+**ANÁLISIS DE COMPONENTES**
