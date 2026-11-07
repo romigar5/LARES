@@ -48,7 +48,7 @@ una colum que distribuye todos los elementos verticalmente.
     - Icon flecha.
 
 ### 4. Tarjeta horizontal de aviso de privacidad
-![Tarjeta Horizontal aviso de privacidad](res/TarjetaHorizontal%28AvisoPrivacidad%29.png)
+![Tarjeta Aviso de privacidad](res/TarjetaHorizontal%28aviso%29.png)
 
 - Layout principal: Row (distribución horizontal)
 - **Componentes interiores:**
@@ -57,3 +57,4 @@ una colum que distribuye todos los elementos verticalmente.
 
 
 **ÁRBOL DE COMPONENTES**
+![Árbol de componentes](res/arbol_componentes.png)
