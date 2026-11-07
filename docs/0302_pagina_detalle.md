@@ -1,5 +1,5 @@
 **DISEÑO DE ALTA FIDELIDAD DE LA PÁGINA DE DETALLE**
-![ESTADO_ENFERMO.png](res/ESTADO_ENFERMO.png)
+![ESTADO_ENFERMO](res/ESTADO_ENFERMO.png)
 
 
 **ANÁLISIS DE COMPONENTES**
@@ -51,13 +51,3 @@ Utilizaremos:
     - Text: Información acerca de la privacidad de los datos personales.
 
 
-### 5. Navigation Bar
-![NavigationBar](res/NavigationBar.png)
-
-Barra global fijada en la parte inferior,  que distribuye horizontalmente las secciones principales.
--Layout principal: Row (distribución horizontal)
-- Column (Layouts Secundarios): Aparecen cuatro.
-- **Componentes Fundamentales:**
-    - NavigationBarItem / Button: Tres accesos directos estándar (`Inicio`, `Familia`, `Ajustes`) que combinan Icon y Text.
-    - FloatingActionButton / Box: Botón destacado central (`Ayuda / SOS`) con fondo rojo elevado, que
-      combina Icon + Text.
