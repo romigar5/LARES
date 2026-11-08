@@ -4,7 +4,7 @@ aplicación.
 ![Lista de familiares](res/pantallaListado.png)
 
 **ANÁLISIS DE COMPONENTES**
-![Análisis componentes `página listado](res/analisis_componentes_listado.png)
+![Análisis componentes página listado](res/analisis_componentes_listado.png)
 
 Como se puede observar en el diseño, toda la pantalla se encuentra envuelta en un LazyColumn que distribuye
 los elementos verticalmente y permite el desplazamiento por la pantalla (scroll).
@@ -62,3 +62,8 @@ Barra global fijada en la parte inferior,  que distribuye horizontalmente las se
 
 **ÁRBOL DE COMPONENTES**
 
+A continuación se muestran dos diseños del árbol, uno realizado en canva y otro, en figma. Se presentan
+de esta manera debido a que canva no mostraba los niveles correctamente y se perfeccionaron en Figma.
+
+![Árbol de componentes de página de listado en canva](res/%C3%81rbol%20de%20componentes_paginaLISTADO_canva.png)
+![Árbol de componenetes de página de listado en figma](res/LARES%20%C2%B7%20%C3%81rbol%20de%20componentes%20%C2%B7%20PaginaListado_FIGMA.png)

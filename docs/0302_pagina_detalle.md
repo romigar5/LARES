@@ -61,10 +61,13 @@ Utilizaremos:
 
 **ÁRBOL DE COMPONENTES**
 
-![Árbol de componentes](res/arbol_componentes.png)
-
+A continuación se muestran dos diseños del árbol, uno realizado en canva y otro, en figma. Se presentan
+de esta manera debido a que canva no mostraba los niveles correctamente y se perfeccionaron en Figma.
+![árbol de componentes de página detalle en canva](res/arbol_componentes_detalle_corregido.jpg)
+![árbol de componentes de página detalle en FIGMA](res/LARES%20%C2%B7%20%C3%81rbol%20de%20componentes_paginaDETALLE_figma.png)
 
 **CÓDIGO JETPACK COMPOSE**
+
 
 
 
