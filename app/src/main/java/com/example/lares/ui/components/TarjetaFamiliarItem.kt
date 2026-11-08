@@ -43,14 +43,19 @@ import com.example.lares.R
  * Representa cada tarjeta dentro de la LazyColumn y cada contacto guardado dentro de la app
  */
 
+
+data class TarjetaFamiliarData(
+    val nombre: String,
+    val imagenResId: Int,
+    val onLlamarClick: () -> Unit,
+    val onVideollamadaClick: () -> Unit
+)
 @Composable
 
 //Parámetros que recibe la función de la tarjeta
+
 fun TarjetaFamiliarItem(
-    nombre: String,
-    imagenResId: Int,
-    onLlamarClick: () -> Unit,
-    onVideollamadaClick: () -> Unit,
+    data: TarjetaFamiliarData,
     modifier: Modifier = Modifier
 
 ){
@@ -78,15 +83,15 @@ fun TarjetaFamiliarItem(
                 contentAlignment = Alignment.Center //Alineado al centro
             ){
                 Image(
-                    painter = painterResource(id = imagenResId),
-                    contentDescription = "Foto de Juana",
+                    painter = painterResource(id= data.imagenResId),
+                    contentDescription = "Foto de ${data.nombre}",
                     modifier = Modifier.fillMaxSize()
                 )
             }
 
             //2. Text: Nombre y parentesco del familiar
             Text(
-                text = nombre,
+                text = data.nombre,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF3E120D)
@@ -96,7 +101,7 @@ fun TarjetaFamiliarItem(
 
             //3. Button: Acción de llamada (principal)
             Button(
-                onClick = onLlamarClick, //Acción del botón
+                onClick = data.onLlamarClick, //Acción del botón
                 modifier = Modifier
                     .fillMaxWidth() //Ocupa el ancho de columna
                     .height(48.dp),
@@ -129,7 +134,7 @@ fun TarjetaFamiliarItem(
 
             //4. OutlinedButton: Botón secundario para videollamada (opcional)
             OutlinedButton(
-                onClick = onVideollamadaClick,
+                onClick = data.onVideollamadaClick,
                 modifier = Modifier
                     .fillMaxWidth() //Ocupa ancho del contenedor
                     .height(48.dp),
@@ -164,17 +169,7 @@ fun TarjetaFamiliarItem(
 
 }
 
-//Función para mostrar la vista en el panel de diseño de Android Studio
-@Preview(showBackground = true)
-@Composable
-fun TarjetaFamiliarItemPreview(){
-    TarjetaFamiliarItem(
-        nombre = "Juana (Hija)",
-        imagenResId = R.drawable.ic_launcher_background,
-        onLlamarClick = {},
-        onVideollamadaClick = {}
-    )
-}
+
 
 
 

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,6 +16,8 @@ import androidx.compose.ui.unit.dp
 //-----------------------------------------------------
 @Composable
 fun PantallaDetalle(
+    onLlamarCentroMedicoClick: () -> Unit = {},
+    onLlamarFamiliaresClick: () -> Unit = {},
 
     //Permite personalizar la pantalla desde fuera
     modifier: Modifier = Modifier
@@ -40,17 +43,29 @@ fun PantallaDetalle(
                 subtitulo = "Consultorio San Rafael (24h)",
                 textoBoton = "Llamar centro médico",
                 iconoHeader = Icons.Default.LocalHospital,
-                onCall
+                colorBoton = Color(0xFF7A291E),
+                onLlamarClick = onLlamarCentroMedicoClick //Acción que realiza
             )
         }
 
+        //3. Tarjeta de Familiares (segunda de acción)
+        item{
+            TarjetaAccion(
+                categoria = "RED DE APOYO",
+                titulo = "Familiares",
+                subtitulo = "Contactos frecuentes: Carmen e Isabel",
+                textoBoton = "Llamar familiares",
+                subtextoBoton = "Avisar a tus seres queridos",
+                iconoHeader = Icons.Default.Group,
+                colorBoton = Color(0xFF3E120D),
+                onLlamarClick = onLlamarFamiliaresClick
+        }
+
+        //4. Tarjeta de Aviso final
+        item{
+            TarjetaAvico()
+        }
     }
 
-
-
-
-
-
-
-
 }
+//Componentes auxiliares
