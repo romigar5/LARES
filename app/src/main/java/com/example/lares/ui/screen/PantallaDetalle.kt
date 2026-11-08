@@ -1,4 +1,4 @@
-package com.example.lares
+package com.example.lares.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
