@@ -33,13 +33,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.LineHeightStyle
 
 //-----------------------------------------------------
 //   VISTA DE DETALLE AISLADA (SIN scaffold, menudrawer ni navegación)
 //-----------------------------------------------------
 
-//Pasan los datos a los componentes
+//datos de la tajeta de estado
 data class TarjetaEstadoData(
     val estado: String,
     val nombre: String,
@@ -90,7 +92,7 @@ fun PantallaDetalle(
         colorBoton = Color(0xFF3E120D),
         onLlamarClick = onLlamarFamiliaresClick
     )
-
+    //Lista dinámica vertical
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -139,9 +141,9 @@ fun TarjetaEstado(data: TarjetaEstadoData) {
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            // Columna con los textos
+            // Columna con los textos y el estado
             Column {
-                // Box para la etiqueta de estado (badge)
+                // Etiqueta redonde del estado
                 Box(
                     modifier = Modifier
                         .clip(CircleShape)
@@ -161,7 +163,7 @@ fun TarjetaEstado(data: TarjetaEstadoData) {
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Text(text = data.mensaje, fontSize = 14.sp)
+                Text(text = data.mensaje, fontSize = 14.sp) //fuente .sp
             }
         }
     }
@@ -189,7 +191,10 @@ fun TarjetaEstado(data: TarjetaEstadoData) {
                         Text(text = data.subtitulo, fontSize = 12.sp, color = Color.Gray)
                     }
                 }
+                //Espaciado entre elementos
                 Spacer(modifier = Modifier.height(12.dp))
+
+                //Botón de llamar
                 Button(
                     onClick = data.onLlamarClick,
                     modifier = Modifier.fillMaxWidth(),
@@ -209,12 +214,25 @@ fun TarjetaEstado(data: TarjetaEstadoData) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color(0xFFEEF7F2))
-        ) {
-            Text(
-                text = "Tu ubicación y ficha de salud se compartirán automáticamente al pulsar cualquier botón de llamada.",
+        ){
+            Row(
                 modifier = Modifier.padding(16.dp),
-                fontSize = 12.sp,
-                color = Color(0xFF2E5936)
-            )
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                //Icono del check
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    contentDescription = null,
+                    tint = Color(0xFF2E5936)
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Text(
+                    text = "Tu ubicación y ficha de salud se compartirán automáticamente al pulsar cualquier botón de llamada.",
+                    modifier = Modifier.padding(16.dp),
+                    fontSize = 12.sp,
+                    color = Color(0xFF2E5936)
+                )
+            }
         }
     }
