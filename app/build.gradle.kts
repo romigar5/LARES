@@ -33,7 +33,11 @@ android {
 
 dependencies {
     implementation(libs.appcompat)
+    implementation(libs.foundation)
+    implementation(libs.foundation.layout)
     implementation(libs.material)
+    implementation(libs.runtime)
+    implementation(libs.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

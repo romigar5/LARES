@@ -1,4 +1,6 @@
+
 **DISEÑO DE ALTA FIDELIDAD DE LA PÁGINA DE DETALLE**
+
 ![ESTADO_ENFERMO](res/ESTADO_ENFERMO.png)
 
 
@@ -13,19 +15,19 @@ Utilizaremos:
 - Rectángulo rosa: box
 - Línea amarilla: separaciones
 
-Antes de comenzar con el análisis de cada elemento, cabe destacar que toda la página está envuelta en 
-una colum que distribuye todos los elementos verticalmente.
 
 ### 1. Tarjeta Horizontal (Cabecera de Estado)
+
 ![Tarjeta Estado](res/TarjetaHorizontal%28cabecera%29.png)
 
 - Layout principal: Row (distribución horizontal).
-- Componentes interiores:
+- **Componentes interiores:**
     - Box + Text: Ilustración a color del emoji.
     - Column: Apila verticalmente la insignia de estado y los textos correspondientes.
     - Box + Text: Contenedor marrón con el texto de estado.
 
 ### 2. Tarjeta Vertical de acción (Atención médica)
+
 ![Tarjeta Atencion Medica](res/TarjetaVertical%28AtencionMedica%29.png)
 
 - Layout principal: Column (distribución vertical).
@@ -37,6 +39,7 @@ una colum que distribuye todos los elementos verticalmente.
     - Icon flecha.
 
 ### 3. Tarjeta Vertical de acción (Red de apoyo)
+
 ![Tarjeta Red de Apoyo](res/TarjetaVertical%28Apoyo%29.png)
 
 - Layout principal: Column (distribución vertical)
@@ -57,4 +60,32 @@ una colum que distribuye todos los elementos verticalmente.
 
 
 **ÁRBOL DE COMPONENTES**
+
 ![Árbol de componentes](res/arbol_componentes.png)
+
+
+**CÓDIGO JETPACK COMPOSE**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
