@@ -1,4 +1,4 @@
-package com.example.lares.ui.screen
+package com.example.lares.ui.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,9 +33,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.filled.CheckCircle
+
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.tooling.preview.Preview
+
 
 //-----------------------------------------------------
 //   VISTA DE DETALLE AISLADA (SIN scaffold, menudrawer ni navegación)
@@ -61,7 +63,7 @@ data class TarjetaAccionData(
 
 
 @Composable
-fun PantallaDetalle(
+fun PaginaDetalle(
     onLlamarCentroMedicoClick: () -> Unit = {},
     onLlamarFamiliaresClick: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -236,3 +238,7 @@ fun TarjetaEstado(data: TarjetaEstadoData) {
             }
         }
     }
+@Preview(showBackground = true)
+@Composable
+fun PantallaDetallePreview()
+{PaginaDetalle()}
