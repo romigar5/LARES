@@ -1,5 +1,6 @@
 package com.example.lares.ui.pages
 
+import android.R.attr.data
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,7 @@ import androidx.compose.material.icons.filled.CheckCircle
 
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.lares.ui.theme.AppTheme
 
 
 //-----------------------------------------------------
@@ -240,5 +242,12 @@ fun TarjetaEstado(data: TarjetaEstadoData) {
     }
 @Preview(showBackground = true)
 @Composable
-fun PantallaDetallePreview()
-{PaginaDetalle()}
+fun PantallaDetallePreview(){
+    AppTheme {
+        data = PaginaDetalleData(
+            nombreUsuario = "Juan",
+            onLlamarCentroMedicoClick = {},
+            onLlamarFamiliaresClick = {}
+    }
+}
+

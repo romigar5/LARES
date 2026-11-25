@@ -1,9 +1,36 @@
 <resources>
     <string name="app_name">Lares</string>
+    <!--Textos para TarjetaFamiliarItem-->
     <!--Usamos %1$s como hueco para insertar un texto variable (nombre del familiar)-->
     <string name="desc_foto_familiar">Foto de %1$s</string>
     <string name="desc_icono_telefono">Icono teléfono</string>
     <string name="texto_llamar">Llamar</string>
     <string name="desc_icono_camara">Icono cámara</string>
     <string name="texto_videollamada">Videollamada</string>
+
+    <!--Textos para PaginaDetalle y sus tarjetas-->
+
+    <!--Textos de la tarjeta de estado-->
+    <string name="desc_icono_estado">Estado de salud</string>
+    <string name="estado_enfermo">• ESTADO: ENFERMO</string>
+    <string name="saludo_detalle">%1$s, no estás solo</string>
+    <string name="mensaje_estado_detalle">Estamos aquí para ayudarte de inmediato.Elige qué necesitas:</string>
+
+    <!--Textos de la tarjeta de acción (Atención médica)-->
+    <string name="categoria_at_medica">ATENCIÓN MÉDICA</string>
+    <string name="titulo_centro_salud">Centro de Salud</string>
+    <string name="subtitulo_centro_salud">Consultorio San Rafael (24h)</string>
+    <string name="btn_llamar_centro_salud">Llamar centro médico</string>
+
+    <!--Textos de la tarjeta de acción (RED DE APOYO)-->
+    <string name="categori_red_apoyo">RED DE APOYO</string>
+    <string name="titulo_familiares">Familiares</string>
+    <string name="subtitulo_familiares">Contactos frecuentes: Carmen e Isabel</string>
+    <string name="btn_llamar_familiares">Llamar a familiares</string>
+
+    <!--Textos de la tarjeta de aviso-->
+    <string name="texto_seguridad">Tu ubicación y ficha de salud se compartirán automáticamente al pulsar cualquier botón de llamada.</string>
+    <string name="desc_icono_aviso">Información de seguridad</string>
+
+
 </resources>
