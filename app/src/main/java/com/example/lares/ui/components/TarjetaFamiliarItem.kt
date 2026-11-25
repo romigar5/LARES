@@ -23,6 +23,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,11 +33,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lares.R
+import com.example.lares.ui.theme.AppTheme
 
 /**
  * Componente reutilizable TarjetaFamiliarItem
@@ -62,7 +65,8 @@ fun TarjetaFamiliarItem(
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        //Llamamos directamente a nuestro tema propio para implementar los colores
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -79,22 +83,23 @@ fun TarjetaFamiliarItem(
                 modifier = Modifier
                     .size(80.dp)
                     .clip(CircleShape) //Forma
-                    .background(Color(0xFFF3D5CF)),
+                    .background(MaterialTheme.colorScheme.primaryContainer),
                 contentAlignment = Alignment.Center //Alineado al centro
             ){
                 Image(
                     painter = painterResource(id= data.imagenResId),
-                    contentDescription = "Foto de ${data.nombre}",
+                    contentDescription = stringResource(R.string.desc_foto_familiar,data.nombre),
                     modifier = Modifier.fillMaxSize()
                 )
             }
 
             //2. Text: Nombre y parentesco del familiar
             Text(
-                text = data.nombre,
-                fontSize = 18.sp,
+                text = data.nombre, //Dato dinámico
+                //Implementamos la tipografía del theme propio
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF3E120D)
+                color = MaterialTheme.colorScheme.onSurface
             )
             //Espaciador vertical
             Spacer(modifier = Modifier.height(4.dp))
@@ -105,7 +110,11 @@ fun TarjetaFamiliarItem(
                 modifier = Modifier
                     .fillMaxWidth() //Ocupa el ancho de columna
                     .height(48.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4A1813)),
+                colors = ButtonDefaults.buttonColors(
+                    //Relleno del button
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    //Texto e icono que van dentro
+                    contentColor = MaterialTheme.colorScheme.onPrimary),
                 shape = RoundedCornerShape(12.dp)  //Esquinas redondeadas
 
             ){
@@ -118,15 +127,20 @@ fun TarjetaFamiliarItem(
                     //Icono del teléfono y texto
                     Icon(
                         imageVector = Icons.Default.Phone, //cargamos el vector de teléfono
-                        contentDescription = "Icono teléfono",  //Descripción para accesibilidad
-                        tint = Color.White  //Coloreamos de blanco el icono
+                        contentDescription = stringResource(R.string.desc_icono_telefono),  //Descripción para accesibilidad
+
                     )
 
+                    //Introducimos un spacer
+                    Spacer(modifier = Modifier.width(8.dp))
+
                     Text(
-                        text = "Llamar",
-                        fontSize = 16.sp,  //fuentes con .sp
+                        //Llamamos directamente al recurso de strings.mxl
+                        text = stringResource(R.string.texto_llamar),
+                        //Aplicamos la fuente de nuestro theme
+                        style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+
 
                     )
                 } //Cerramos el row
@@ -139,7 +153,8 @@ fun TarjetaFamiliarItem(
                     .fillMaxWidth() //Ocupa ancho del contenedor
                     .height(48.dp),
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF4A1813))
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.primary)
 
             ) {
                 //Row que contiene el OutlinedButton
@@ -150,14 +165,14 @@ fun TarjetaFamiliarItem(
                 //Icono de videollamada y texto dentro del Row
                 Icon(
                     imageVector = Icons.Default.Videocam,
-                    contentDescription = "Icono cámara",
-                    tint = Color(0xFF4A1813)
+                    contentDescription = stringResource(R.string.desc_icono_camara),
+
                 )
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
-                    text = "Videollamada",
-                    fontSize = 16.sp,
+                    text = stringResource(R.string.texto_videollamada),
+                    style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold
                 )
                 }
@@ -168,8 +183,24 @@ fun TarjetaFamiliarItem(
     }
 
 }
-
-
+@Preview(showBackground = true)
+@Composable
+//Función sin parámetros
+fun TarjetaFamiliarItemPreview(){
+    //La envolvemos en nuestro theme
+    AppTheme{
+        //Llamamos al componente real pasándole datos de prueba
+        TarjetaFamiliarItem(
+            data = TarjetaFamiliarData(
+                nombre = "Juana (hija)",
+                imagenResId = R.drawable.juana_hija,
+                onLlamarClick = {},
+                onVideollamadaClick = {}
+            ),
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
 
 
 

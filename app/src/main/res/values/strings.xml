@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lares</string>
+    <!--Usamos %1$s como hueco para insertar un texto variable (nombre del familiar)-->
+    <string name="desc_foto_familiar">Foto de %1$s</string>
+    <string name="desc_icono_telefono">Icono teléfono</string>
+    <string name="texto_llamar">Llamar</string>
+    <string name="desc_icono_camara">Icono cámara</string>
+    <string name="texto_videollamada">Videollamada</string>
 </resources>
