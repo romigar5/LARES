@@ -30,20 +30,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.lares.R
 import com.example.lares.ui.theme.AppTheme
 
 /**
  * Componente reutilizable TarjetaFamiliarItem
- * Representa cada tarjeta dentro de la LazyColumn y cada contacto guardado dentro de la app
+ * Representa cada tarjeta dentro de un LazyColumn y cada contacto guardado dentro de la app
+ * Se utiliza LazyColumn porque se proyecta una lista de varios familiares, no un tamaño fijo
  */
 
 
