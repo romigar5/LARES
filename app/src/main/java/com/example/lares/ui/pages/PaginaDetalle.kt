@@ -26,7 +26,7 @@ import com.example.lares.ui.components.TarjetaEstado
 import com.example.lares.ui.components.TarjetaEstadoData
 import com.example.lares.ui.theme.AppTheme
 
-/*Data class que agrupa estado y ventos de toda la pantalla*/
+/*Data class que agrupa estado y eventos de toda la pantalla*/
 data class PaginaDetalleData(
     val nombreUsuario: String,
     val onLlamarCentroMedicoClick: () -> Unit,
