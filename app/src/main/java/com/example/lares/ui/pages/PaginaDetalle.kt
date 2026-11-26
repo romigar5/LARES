@@ -4,250 +4,122 @@ import android.R.attr.data
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.LocalHospital
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.filled.CheckCircle
-
-import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.lares.R
+import com.example.lares.ui.components.TarjetaAccion
+import com.example.lares.ui.components.TarjetaAccionData
+import com.example.lares.ui.components.TarjetaAviso
+import com.example.lares.ui.components.TarjetaAvisoData
+import com.example.lares.ui.components.TarjetaEstado
+import com.example.lares.ui.components.TarjetaEstadoData
 import com.example.lares.ui.theme.AppTheme
 
-
-//-----------------------------------------------------
-//   VISTA DE DETALLE AISLADA (SIN scaffold, menudrawer ni navegación)
-//-----------------------------------------------------
-
-//datos de la tajeta de estado
-data class TarjetaEstadoData(
-    val estado: String,
-    val nombre: String,
-    val mensaje: String
+/*Data class que agrupa estado y ventos de toda la pantalla*/
+data class PaginaDetalleData(
+    val nombreUsuario: String,
+    val onLlamarCentroMedicoClick: () -> Unit,
+    val onLlamarFamiliaresClick: () -> Unit
 )
 
-//Ambas tarjetas de acción son reutilizables por sus componentes
-data class TarjetaAccionData(
-    val categoria: String,
-    val titulo: String,
-    val subtitulo: String,
-    val textoBoton: String,
-    val iconoHeader: ImageVector,
-    val colorBoton: Color,
-    val onLlamarClick: () -> Unit
-)
-
-
+/*Pantalla de detalle de asistencia urgente
+* Aquí juntamos componentes reutilizables*/
 @Composable
 fun PaginaDetalle(
-    onLlamarCentroMedicoClick: () -> Unit = {},
-    onLlamarFamiliaresClick: () -> Unit = {},
+    data: PaginaDetalleData,
     modifier: Modifier = Modifier
 ) {
-    // Creamos objetos con los datos de las tarjetas
+    // Creamos objetos con los datos de las tarjetas, extrayendo los textos desde string.xml
     val estadoData = TarjetaEstadoData(
-        estado = "• ESTADO: ENFERMO",
-        nombre = "Juan",
-        mensaje = "Estamos aquí para ayudarte de inmediato. Elige qué necesitas:"
+        estado = stringResource(R.string.estado_enfermo),
+        nombre = data.nombreUsuario,
+        mensaje = stringResource(R.string.mensaje_estado_detalle)
     )
 
+    //Tarjeta de Atención Médica
     val atencionData = TarjetaAccionData(
-        categoria = "ATENCIÓN MÉDICA",
-        titulo = "Centro de Salud",
-        subtitulo = "Consultorio San Rafael (24h)",
-        textoBoton = "Llamar centro médico",
+        categoria = stringResource(R.string.categoria_at_medica),
+        titulo = stringResource(R.string.titulo_centro_salud),
+        subtitulo = stringResource(R.string.subtitulo_centro_salud),
+        textoBoton = stringResource(R.string.btn_llamar_centro_salud),
         iconoHeader = Icons.Default.LocalHospital,
-        colorBoton = Color(0xFF7A291E),
-        onLlamarClick = onLlamarCentroMedicoClick
+        //Aplicamos el color 'primary' porque la acción requiere urgencia
+        colorBoton = MaterialTheme.colorScheme.primary,
+        onLlamarClick = data.onLlamarCentroMedicoClick
+    )
+    //Tarjeta de Familiares
+    val familiaresData = TarjetaAccionData(
+        categoria = stringResource(R.string.categori_red_apoyo),
+        titulo = stringResource(R.string.titulo_familiares),
+        subtitulo = stringResource(R.string.subtitulo_familiares),
+        textoBoton = stringResource(R.string.btn_llamar_familiares),
+        iconoHeader = Icons.Default.Group,
+        //Aplicamos color 'secondary' para diferenciar las redes de apoyo
+        colorBoton = MaterialTheme.colorScheme.secondary,
+        onLlamarClick = data.onLlamarFamiliaresClick
     )
 
-    val familiaresData = TarjetaAccionData(
-        categoria = "RED DE APOYO",
-        titulo = "Familiares",
-        subtitulo = "Contactos frecuentes: Carmen e Isabel",
-        textoBoton = "Llamar familiares",
-        iconoHeader = Icons.Default.Group,
-        colorBoton = Color(0xFF3E120D),
-        onLlamarClick = onLlamarFamiliaresClick
+    //Tarjeta de Aviso
+    val avisoData = TarjetaAvisoData(
+        mensaje = stringResource(R.string.texto_seguridad)
     )
-    //Lista dinámica vertical
-    LazyColumn(
+
+
+
+
+    //Column con scroll vertical: se escoge porque existe un número fijo y pequeño de elementos.
+    Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFFFF8F6))
+            //Aplicamos el fondo general de nuestro AppTheme
+            .background(MaterialTheme.colorScheme.background)
+            //Habilitamos el scroll vertical y recordamos la posición
+            .verticalScroll(rememberScrollState())
             .padding(16.dp),
+
+        //Aplicamos un espaciado entre tarjetas
         verticalArrangement = Arrangement.spacedBy(16.dp)
 
     ){
-        //1. Tarjeta de estado
-        item{ TarjetaEstado(data = estadoData)
-        }
+        //1. Tarjeta de estado del usuario
+        TarjetaEstado(data = estadoData)
 
         //2. Tarjeta de Atención Médica (tarjeta de acción)
-        item{TarjetaAccion(data = atencionData)}
+        TarjetaAccion(data = atencionData)
 
         //3. Tarjeta de Familiares (segunda de acción)
-        item{TarjetaAccion(data = familiaresData)}
+        TarjetaAccion(data = familiaresData)
 
         //4. Tarjeta de Aviso final
-        item{
-            TarjetaAviso()}
-    }
-}
-//Componentes auxiliares
-// 3. COMPONENTES REUTILIZABLES BASADOS EN SUS DATA CLASSES
-@Composable
-fun TarjetaEstado(data: TarjetaEstadoData) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFFBE8E5))
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Box para el icono/emoji
-            Box(
-                modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFFF3C7C0)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "🤒", fontSize = 28.sp)
-            }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            // Columna con los textos y el estado
-            Column {
-                // Etiqueta redonde del estado
-                Box(
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(Color(0xFF7A291E))
-                        .padding(horizontal = 10.dp, vertical = 4.dp)
-                ) {
-                    Text(
-                        text = data.estado,
-                        color = Color(0xFF7A291E),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp
-                    )
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = "${data.nombre}, no estás solo.",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(text = data.mensaje, fontSize = 14.sp) //fuente .sp
-            }
-        }
+        TarjetaAviso(data = avisoData)
     }
 }
 
-    @Composable
-    fun TarjetaAccion(data: TarjetaAccionData) {
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = data.iconoHeader,
-                        contentDescription = null,
-                        tint = Color(0xFF7A291E)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Column {
-                        Text(
-                            text = data.categoria,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF8C4339)
-                        )
-                        Text(text = data.titulo, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                        Text(text = data.subtitulo, fontSize = 12.sp, color = Color.Gray)
-                    }
-                }
-                //Espaciado entre elementos
-                Spacer(modifier = Modifier.height(12.dp))
-
-                //Botón de llamar
-                Button(
-                    onClick = data.onLlamarClick,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = data.colorBoton)
-                ) {
-                    Icon(Icons.Default.Phone, contentDescription = null)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = data.textoBoton)
-                }
-            }
-        }
-    }
-
-
-    @Composable
-    fun TarjetaAviso() {
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFFEEF7F2))
-        ){
-            Row(
-                modifier = Modifier.padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                //Icono del check
-                Icon(
-                    imageVector = Icons.Default.CheckCircle,
-                    contentDescription = null,
-                    tint = Color(0xFF2E5936)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-
-                Text(
-                    text = "Tu ubicación y ficha de salud se compartirán automáticamente al pulsar cualquier botón de llamada.",
-                    modifier = Modifier.padding(16.dp),
-                    fontSize = 12.sp,
-                    color = Color(0xFF2E5936)
-                )
-            }
-        }
-    }
+//Vista previa de pantalla completa envuelta en nuestro AppTheme
 @Preview(showBackground = true)
 @Composable
 fun PantallaDetallePreview(){
     AppTheme {
-        data = PaginaDetalleData(
-            nombreUsuario = "Juan",
-            onLlamarCentroMedicoClick = {},
-            onLlamarFamiliaresClick = {}
+        PaginaDetalle(
+            data = PaginaDetalleData(
+                nombreUsuario = "Juan",
+                onLlamarCentroMedicoClick = {},
+                onLlamarFamiliaresClick = {}
+            )
+
+        )
+
     }
 }
 
