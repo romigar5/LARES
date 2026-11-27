@@ -15,8 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lares.R
 import com.example.lares.ui.components.TarjetaAccion
 import com.example.lares.ui.components.TarjetaAccionData
@@ -37,13 +42,39 @@ data class PaginaDetalleData(
 * Aquí juntamos componentes reutilizables*/
 @Composable
 fun PaginaDetalle(
-    data: PaginaDetalleData,
+    //ViewModel de la pantalla de detalle
+    vm: PaginaDetalleVM = viewModel(),
+
+    //Recibe el SanckbarHostState del Scaffols para poder lanzar avisos emergentes
+    // Es anulable (? = null) para que @Preview pueda llamar a PaginaDetalle() sin necesitar un Scaffold real
+    //Está conectado con mensajeAviso, que podía ser null o lanzar mensaje
+    snackbarHostState: SnackbarHostState? =null,
+
+    //Modificador externo que recibe el innerPadding del Scaffold
     modifier: Modifier = Modifier
 ) {
+
+    //Suscribimos la pantalla al StateFlow del ViewModel
+    //'collectAsState()' convierte el flujo en un State para redibujar si algo cambia
+    //'val state by' permite leer directamente el 'state.nombreUsuario' sin escribir cada vez '.value'
+    val state by vm.uiState.collectAsState()
+
+    //Disparamos LaunchedEffect cada vez que cambia 'state.mensajeAviso'
+    LaunchedEffect(state.mensajeAviso) {
+        //Si 'mensajeAviso' no es null (el usuario pulsó el botón de llamar en el VM)
+        state.mensajeAviso?.let { mensaje ->
+            //Mostramos el mensaje emergente que se generó con el VM
+            snackbarHostState?.showSnackbar(mensaje)
+            //Avisamos al VM de que el aviso ya fue mostrado para que vuelva a ponerse 'mensajeAviso = null'
+            vm.onAvisoMostrado()
+        }
+    }
+
+
     // Creamos objetos con los datos de las tarjetas, extrayendo los textos desde string.xml
     val estadoData = TarjetaEstadoData(
         estado = stringResource(R.string.estado_enfermo),
-        nombre = data.nombreUsuario,
+        nombre = state.nombreUsuario,
         mensaje = stringResource(R.string.mensaje_estado_detalle)
     )
 
@@ -56,7 +87,8 @@ fun PaginaDetalle(
         iconoHeader = Icons.Default.LocalHospital,
         //Aplicamos el color 'primary' porque la acción requiere urgencia
         colorBoton = MaterialTheme.colorScheme.primary,
-        onLlamarClick = data.onLlamarCentroMedicoClick
+        //Ejecutamos la función del VM en vez de recibirla desde fuera como antes
+        onLlamarClick = { vm.onLlamarCentroMedico()}
     )
     //Tarjeta de Familiares
     val familiaresData = TarjetaAccionData(
@@ -67,15 +99,14 @@ fun PaginaDetalle(
         iconoHeader = Icons.Default.Group,
         //Aplicamos color 'secondary' para diferenciar las redes de apoyo
         colorBoton = MaterialTheme.colorScheme.secondary,
-        onLlamarClick = data.onLlamarFamiliaresClick
+        //Ejecutamos la función del VM en vez de recibirla desde fuera como antes
+        onLlamarClick = {vm.onLlamarFamiliares()}
     )
 
     //Tarjeta de Aviso
     val avisoData = TarjetaAvisoData(
         mensaje = stringResource(R.string.texto_seguridad)
     )
-
-
 
 
     //Column con scroll vertical: se escoge porque existe un número fijo y pequeño de elementos.
@@ -111,14 +142,8 @@ fun PaginaDetalle(
 @Composable
 fun PantallaDetallePreview(){
     AppTheme {
-        PaginaDetalle(
-            data = PaginaDetalleData(
-                nombreUsuario = "Juan",
-                onLlamarCentroMedicoClick = {},
-                onLlamarFamiliaresClick = {}
-            )
-
-        )
+        //Cambiamos los datos fijos anteriores por su VM (ViewModel)
+        PaginaDetalle()
 
     }
 }

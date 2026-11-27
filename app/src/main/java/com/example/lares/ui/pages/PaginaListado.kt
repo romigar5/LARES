@@ -9,32 +9,48 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lares.R
 import com.example.lares.ui.components.CabeceraSeccion
 import com.example.lares.ui.components.CabeceraSeccionData
-import com.example.lares.ui.components.TarjetaFamiliarData
 import com.example.lares.ui.components.TarjetaFamiliarItem
 import com.example.lares.ui.theme.AppTheme
 
 
-/*Data class que recibe PaginaListado con la lista de familiares y las acciones */
-data class PaginaListadoData(
-    val familiares: List<TarjetaFamiliarData>
-)
+
 
 //Pantalla de listado de familiares. Utilizamos un LazyColumn para pintar las tarjetas en una lista dinámica
 @Composable
 fun PaginaListado(
-    data: PaginaListadoData,       //Datos que necesita la pantalla para pintar las tarjetas
-    modifier: Modifier = Modifier  //Modificador externo
-){
+    //ViewModel de la pantalla de listado
+    vm: PaginaListadoVM = viewModel(),
+    //Modificador externo que recibe innerPadding
+    modifier: Modifier = Modifier
+)
+
+{
+    //Dispara la cargar inicial de datos en el ViewModel al entrar en la pantalla (una única vez)
+    LaunchedEffect(Unit){
+        vm.load()
+    }
+
+    //Observamos el estado del ViewModel
+    //'val state by' permite acceder directamente a los datos escribiendo state.familiares o state.nombreUsuario
+    //'collectAsState' Convierte el StateFlow del ViewModel en State para atender cualquier cambio dentro del VM
+    val state by vm.uiState.collectAsState()
+
     //Contenedor Column vertical que ocupa toda la pantalla
+    //'modifier' (en minúscula) para respetar los márgenes del Scaffold
+
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
@@ -56,7 +72,8 @@ fun PaginaListado(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             //Recorremos la lista de familiares y pintamos una TarjetaFamiliarItem por cada uno
-            items(data.familiares){familiar ->
+           //Los datos vienen del StateFlow del ViewModel
+            items(state.familiares){familiar ->
                 TarjetaFamiliarItem(data = familiar)
 
             }
@@ -72,24 +89,7 @@ fun PaginaListado(
 @Composable
         fun PaginaListadoPreview(){
             AppTheme(darkTheme = false) {
-                PaginaListado(
-                    data = PaginaListadoData(
-                        familiares = listOf(
-                            TarjetaFamiliarData(
-                                nombre = "Juana (hija)",
-                                imagenResId = R.drawable.juana_hija,
-                                onLlamarClick = {},
-                                onVideollamadaClick = {}
-                            ),
-                            TarjetaFamiliarData(
-                                nombre = "Pablo (hijo)",
-                                imagenResId = R.drawable.pablo_hijo,
-                                //Aquí no introducimos nada porque es solo para ver el diseño
-                                onLlamarClick = {},
-                                onVideollamadaClick = {}
-                            )
-                        )
-                    )
-                )
+                PaginaListado()
+
             }
         }

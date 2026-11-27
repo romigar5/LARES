@@ -38,11 +38,11 @@ class PaginaListadoVM: ViewModel(){
             familiares = listOf(
                 //Primer familiar de prueba
                 TarjetaFamiliarData(
-                    nombre = "Juan (hija)",
+                    nombre = "Juana (hija)",
                     //Fijarse siempre en el import de 'R'
                     imagenResId = R.drawable.juana_hija,
                     //Pasamos el evento hacia arriba (al ViewModel)
-                    onLlamarClick = { onLlamar("Juana (hija")},
+                    onLlamarClick = { onLlamar("Juana (hija)")},
                     onVideollamadaClick = { onVideollamada("Juana (hija")}
 
                 ),
