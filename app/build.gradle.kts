@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.runtime)
+
     // 1. Usar la plataforma BOM para sincronizar todas las versiones de Compose a una versión estable
     val composeBom = platform("androidx.compose:compose-bom:2024.10.01")
     implementation(composeBom)

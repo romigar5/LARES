@@ -32,5 +32,16 @@
     <string name="texto_seguridad">Tu ubicación y ficha de salud se compartirán automáticamente al pulsar cualquier botón de llamada.</string>
     <string name="desc_icono_aviso">Información de seguridad</string>
 
+    <!--Texto pestaña 1 de la barra inferior (SOS, Urgencias) y descripción accesible del icono -->
+    <string name="nav_urgencias">Urgencias</string>
+
+    <!--Texto pestaña 2 de la barra inferior (Familia, Familiares) y descripción accesible del icono-->
+    <string name="nav_familiares">Familiares</string>
+
+    <!--Descripción accesible de la flecha para retroceder de la barra superior -->
+    <string name="nav_atras">Volver atrás</string>
+
+    <!--Nombre de la app-->
+    <string name="nombreApp">Lares</string>
 
 </resources>
